@@ -1,0 +1,23 @@
+sudo: required
+
+service:
+    - docker
+
+before_install:
+    - docker-compose up -d --build
+
+before_script:
+    - docker-compose run --rm djangoapp HelloDjango/manage.py test
+
+script:
+    - docker-compose run --rm djangoapp HelloDjango/manage.py migrate
+
+
+after_success:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    - docker-compose build --pull
+    - docker push
+
+# script:
+#     - docker run abhinav10p/docker-react npm run test -- --coverage
+
