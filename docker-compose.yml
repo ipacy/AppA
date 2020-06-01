@@ -18,6 +18,7 @@ services:
 
   # web container, with django + gunicorn
   djangoapp:
+    image: abhinav10p/djangoappdj:latest
     build: .
     environment:
       - DJANGO_SETTINGS_MODULE
@@ -30,7 +31,6 @@ services:
       - nginx_network
     depends_on:
       - database1
-    image: abhinav10p/djangoapp:latest
 
   # reverse proxy container (nginx)
   nginx:
