@@ -27,7 +27,7 @@ services:
       - nginx_network
     depends_on:
       - database1
-    image: abhinav10p/djangoapp-1
+    image: abhinav10p/djangoapp:latest
 
   # reverse proxy container (nginx)
   nginx:

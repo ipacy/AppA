@@ -16,7 +16,7 @@ script:
 after_success:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     - docker-compose build --pull
-    - docker push
+    - docker-compose push
 
 # script:
 #     - docker run abhinav10p/docker-react npm run test -- --coverage
