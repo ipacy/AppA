@@ -5,6 +5,10 @@ services:
   # database containers, one for each db
   database1:
     image: abhinav10p/postgresdj
+    image: abhinav10p/nginxdj
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./config/db
     volumes:
       - database1_volume:/var/lib/postgresql/data
     env_file:
