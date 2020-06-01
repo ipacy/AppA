@@ -2,6 +2,11 @@ version: '3'
 
 services:
 
+  baseimage:
+    image: abhinav10p/parentdj
+    build: .
+
+
   # database containers, one for each db
   database1:
     image: abhinav10p/postgresdj
@@ -19,7 +24,9 @@ services:
   # web container, with django + gunicorn
   djangoapp:
     image: abhinav10p/djangoappdj:latest
-    build: .
+    build: 
+      dockerfile: Dockerfile.dev
+      context: .
     environment:
       - DJANGO_SETTINGS_MODULE
     volumes:
