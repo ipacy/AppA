@@ -4,7 +4,7 @@ services:
 
   # database containers, one for each db
   database1:
-    image: postgres:10
+    image: abhinav10p/postgresdj
     volumes:
       - database1_volume:/var/lib/postgresql/data
     env_file:
@@ -31,7 +31,10 @@ services:
 
   # reverse proxy container (nginx)
   nginx:
-    image: nginx:1.13
+    image: abhinav10p/nginxdj
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./config/nginx
     ports:
       - 8000:80
     volumes:
