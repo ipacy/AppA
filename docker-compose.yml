@@ -34,9 +34,7 @@ services:
   # reverse proxy container (nginx)
   nginx:
     image: abhinav10p/dj-nginx:latest
-    build: 
-      context: ./nginx
-      dockerfile: Dockerfile 
+    build: ./nginx
     ports:
       - 8000:80
     volumes:
