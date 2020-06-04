@@ -38,7 +38,7 @@ services:
     ports:
       - 8000:80
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
+      # - ./nginx/conf.d:/etc/nginx/conf.d
       - static:/usr/src/HelloDjango/static
       - media:/usr/src/HelloDjango/media
     networks:
