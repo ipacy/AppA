@@ -7,8 +7,10 @@ services:
     image: postgres:10.0-alpine
     volumes:
       - database1_volume:/var/lib/postgresql/data
-    env_file:
-      - db/database1_env
+    environment:
+      - POSTGRES_USER=dexuser
+      - POSTGRES_PASSWORD=Test@123
+      - POSTGRES_DB=HelloDjangoDB
     networks:
       - db_network
     
