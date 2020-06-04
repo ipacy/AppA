@@ -18,14 +18,14 @@ COPY ./requirements.txt /usr/src/HelloDjango/requirements.txt
 RUN pip install -r requirements.txt
 
 # copy entrypoint.sh
-COPY ./entrypoint.sh /usr/src/HelloDjango/entrypoint.sh
+#COPY ./entrypoint.sh /usr/src/HelloDjango/entrypoint.sh
 
 # copy project
 COPY . /usr/src/HelloDjango/
 
 # run entrypoint.sh
-RUN chmod +x entrypoint.sh
-ENTRYPOINT ["/usr/src/HelloDjango/entrypoint.sh"]
+#RUN chmod +x entrypoint.sh
+#ENTRYPOINT ["/usr/src/HelloDjango/entrypoint.sh"]
 
 
 
