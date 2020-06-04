@@ -1,38 +1,28 @@
-version: '3'
+version: '3.7'
 
 services:
 
-  baseimage:
-    image: abhinav10p/parentdj
-    build: .
-
-
   # database containers, one for each db
   database1:
-    image: abhinav10p/postgresdj
-    build: 
-      dockerfile: Dockerfile.dev
-      context: ./config/db
+    image: postgres:10.0-alpine
     volumes:
       - database1_volume:/var/lib/postgresql/data
     env_file:
-      - config/db/database1_env
+      - db/database1_env
     networks:
       - db_network
-
+    
 
   # web container, with django + gunicorn
   djangoapp:
-    image: abhinav10p/djangoappdj:latest
-    build: 
-      dockerfile: Dockerfile.dev
-      context: .
+    image: abhinav10p/dj-djangoapp:latest
+    build: ./HelloDjango
     environment:
       - DJANGO_SETTINGS_MODULE
     volumes:
-      - .:/opt/services/djangoapp/src
-      - static:/opt/services/djangoapp/static
-      - media:/opt/services/djangoapp/media
+      - .:/usr/src/app
+      - static:/usr/src/HelloDjango/static
+      - media:/usr/src/HelloDjango/media
     networks:
       - db_network
       - nginx_network
@@ -41,16 +31,16 @@ services:
 
   # reverse proxy container (nginx)
   nginx:
-    image: abhinav10p/nginxdj
+    image: abhinav10p/dj-nginx:latest
     build: 
-      dockerfile: Dockerfile.dev
-      context: ./config/nginx
+      context: ./nginx
+      dockerfile: Dockerfile 
     ports:
       - 8000:80
     volumes:
-      - ./config/nginx/conf.d:/etc/nginx/conf.d
-      - static:/opt/services/djangoapp/static
-      - media:/opt/services/djangoapp/media
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - static:/usr/src/HelloDjango/static
+      - media:/usr/src/HelloDjango/media
     networks:
       - nginx_network
     depends_on:
@@ -66,3 +56,8 @@ volumes:
   database1_volume:
   static:
   media:
+
+
+# restart: always
+# image: abhinav10p/dj-app:latest
+# image: abhinav10p/dj-nginx:latest
