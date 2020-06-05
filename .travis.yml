@@ -6,11 +6,11 @@ service:
 before_install:
     - docker-compose up -d --build
 
-before_script:
-    - docker-compose run --rm djangoapp HelloDjango/manage.py test
+# before_script:
+#     - docker-compose run --rm djangoapp HelloDjango/manage.py test
 
-script:
-    - docker-compose run --rm djangoapp HelloDjango/manage.py migrate
+# script:
+#     - docker-compose run --rm djangoapp HelloDjango/manage.py migrate
 
 
 after_success:
